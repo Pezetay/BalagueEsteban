@@ -2,94 +2,89 @@ import random
 import csv
 import math
 
-def generar_saldos():
-    return [round(random.uniform(1000, 10000), 2) for _ in range(10)]
+# Función para asignar saldos aleatorios a 10 clientes
+def asignar_saldos():
+    return [random.uniform(1000, 10000) for _ in range(10)]
 
+# Función para clasificar saldos en tres rangos
 def clasificar_saldos(saldos):
-    rango1 = [saldo for saldo in saldos if saldo < 3000]
-    rango2 = [saldo for saldo in saldos if 3000 <= saldo <= 7000]
-    rango3 = [saldo for saldo in saldos if saldo > 7000]
-    return rango1, rango2, rango3
+    rango_bajo = [saldo for saldo in saldos if saldo < 3000]
+    rango_medio = [saldo for saldo in saldos if 3000 <= saldo <= 7000]
+    rango_alto = [saldo for saldo in saldos if saldo > 7000]
+    return rango_bajo, rango_medio, rango_alto
 
+# Función para calcular estadísticas
 def calcular_estadisticas(saldos):
     saldo_maximo = max(saldos)
     saldo_minimo = min(saldos)
     saldo_promedio = sum(saldos) / len(saldos)
-    media_geometrica = math.prod(saldos) ** (1/len(saldos))
+    media_geometrica = math.exp(sum(math.log(saldo) for saldo in saldos) / len(saldos))
     return saldo_maximo, saldo_minimo, saldo_promedio, media_geometrica
 
-def generar_reporte(saldos):
-    deducciones = {
-        'impuesto': 0.10,  # 10%
-        'seguro': 0.05,    # 5%
-        'otros': 0.02      # 2%
-    }
+# Función para generar reporte y exportar a CSV
+def generar_reporte(saldos, deducciones):
+    with open('reporte_saldos.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Cliente', 'Saldo Inicial', 'Deducción 1', 'Deducción 2', 'Deducción 3', 'Saldo Neto'])
+        for i, saldo in enumerate(saldos):
+            deduccion1 = deducciones.get('deduccion1', 0)
+            deduccion2 = deducciones.get('deduccion2', 0)
+            deduccion3 = deducciones.get('deduccion3', 0)
+            saldo_neto = saldo - deduccion1 - deduccion2 - deduccion3
+            writer.writerow([i+1, saldo, deduccion1, deduccion2, deduccion3, saldo_neto])
 
-    reporte = []
-    for idx, saldo in enumerate(saldos):
-        impuesto = saldo * deducciones['impuesto']
-        seguro = saldo * deducciones['seguro']
-        otros = saldo * deducciones['otros']
-        saldo_neto = saldo - impuesto - seguro - otros
-        reporte.append({
-            'Cliente': f'Cliente {idx + 1}',
-            'Saldo': saldo,
-            'Impuesto': impuesto,
-            'Seguro': seguro,
-            'Otros': otros,
-            'Saldo Neto': saldo_neto
-        })
-    
-    keys = reporte[0].keys()
-    with open('reporte_saldos.csv', 'w', newline='') as archivo_csv:
-        dict_writer = csv.DictWriter(archivo_csv, fieldnames=keys)
-        dict_writer.writeheader()
-        dict_writer.writerows(reporte)
-    
-    return reporte
-
-def mostrar_menu():
-    print("1. Asignar saldos aleatorios")
-    print("2. Clasificar saldos")
-    print("3. Ver estadísticas")
-    print("4. Generar reporte de saldos")
-    print("5. Salir")
-
+# Función principal del programa
 def main():
-    saldos = []
+    print("Bienvenido al sistema de gestión de saldos del banco internacional")
     while True:
-        mostrar_menu()
+        print("\nMenú:")
+        print("1. Asignar saldos aleatorios a 10 clientes")
+        print("2. Clasificar saldos en rangos")
+        print("3. Ver estadísticas de saldos")
+        print("4. Generar reporte de saldos y exportar a CSV")
+        print("5. Salir del programa")
         opcion = input("Seleccione una opción: ")
         
         if opcion == '1':
-            saldos = generar_saldos()
-            print("Saldos generados:", saldos)
+            saldos = asignar_saldos()
+            print("Saldos asignados aleatoriamente:")
+            print(saldos)
+        
         elif opcion == '2':
-            if not saldos:
-                print("Primero debe generar los saldos.")
+            if 'saldos' not in locals():
+                print("Primero debe asignar los saldos (opción 1)")
             else:
-                rango1, rango2, rango3 = clasificar_saldos(saldos)
-                print("Rango 1 (< 3000):", rango1)
-                print("Rango 2 (3000 - 7000):", rango2)
-                print("Rango 3 (> 7000):", rango3)
+                rango_bajo, rango_medio, rango_alto = clasificar_saldos(saldos)
+                print("Rango Bajo (< 3000):", rango_bajo)
+                print("Rango Medio (3000 - 7000):", rango_medio)
+                print("Rango Alto (> 7000):", rango_alto)
+        
         elif opcion == '3':
-            if not saldos:
-                print("Primero debe generar los saldos.")
+            if 'saldos' not in locals():
+                print("Primero debe asignar los saldos (opción 1)")
             else:
                 saldo_maximo, saldo_minimo, saldo_promedio, media_geometrica = calcular_estadisticas(saldos)
-                print(f"Saldo más alto: {saldo_maximo}")
-                print(f"Saldo más bajo: {saldo_minimo}")
-                print(f"Saldo promedio: {saldo_promedio}")
-                print(f"Media geométrica: {media_geometrica}")
+                print("Saldo más alto:", saldo_maximo)
+                print("Saldo más bajo:", saldo_minimo)
+                print("Saldo promedio:", saldo_promedio)
+                print("Media geométrica:", media_geometrica)
+        
         elif opcion == '4':
-            if not saldos:
-                print("Primero debe generar los saldos.")
+            if 'saldos' not in locals():
+                print("Primero debe asignar los saldos (opción 1)")
             else:
-                reporte = generar_reporte(saldos)
-                print("Reporte generado y guardado en 'reporte_saldos.csv'.")
+                deducciones = {
+                    'deduccion1': float(input("Ingrese el monto de la deducción 1: ")),
+                    'deduccion2': float(input("Ingrese el monto de la deducción 2: ")),
+                    'deduccion3': float(input("Ingrese el monto de la deducción 3: "))
+                }
+                generar_reporte(saldos, deducciones)
+                print("Reporte generado y exportado a 'reporte_saldos.csv'")
+        
         elif opcion == '5':
-            print("Gracias por usar la aplicación. ¡Adiós!")
+            print("Gracias por usar el sistema. ¡Hasta luego!")
             break
+        
         else:
             print("Opción no válida. Intente de nuevo.")
 
