@@ -14,10 +14,11 @@ Instrucciones de Ejecución
 
 Al iniciar, el programa mostrará un menú con varias opciones:
 
-Asignar saldos aleatorios a 10 clientes: Esta opción asigna saldos aleatorios a los clientes y los muestra en pantalla.
-Clasificar saldos en rangos: Esta opción clasifica los saldos en rangos bajo, medio y alto. Necesita haber asignado saldos previamente.
-Ver estadísticas de saldos: Calcula y muestra el saldo máximo, mínimo, promedio y la media geométrica de los saldos asignados.
-Generar reporte de saldos y exportar a CSV: Solicita los montos de tres deducciones y genera un reporte con los saldos netos después de aplicar estas deducciones. El reporte se guarda en un archivo llamado reporte_saldos.csv.
-Salir del programa: Termina la ejecución del programa.
+- Asignar saldos aleatorios a 10 clientes: Esta opción asigna saldos aleatorios a los clientes y los muestra en pantalla.
+- Clasificar saldos en rangos: Esta opción clasifica los saldos en rangos bajo, medio y alto. Necesita haber asignado saldos previamente.
+- Ver estadísticas de saldos: Calcula y muestra el saldo máximo, mínimo, promedio y la media geométrica de los saldos asignados.
+- Generar reporte de saldos y exportar a CSV: Solicita los montos de tres deducciones y genera un reporte con los saldos netos después de aplicar estas deducciones. El reporte se guarda en un archivo llamado reporte_saldos.csv.
+- Salir del programa: Termina la ejecución del programa.
+
 Seleccione la opción deseada ingresando el número correspondiente y presionando Enter.
 Siga las instrucciones que el programa le indique para cada opción seleccionada.
