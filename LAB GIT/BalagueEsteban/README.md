@@ -5,8 +5,11 @@ Descripción del Proyecto
 Este proyecto consiste en desarrollar una aplicacion de sistema de gestión de saldos para un banco internacional. El programa realiza varias operaciones relacionadas con la asignación, clasificación y análisis de saldos de clientes. También permite generar y exportar un reporte en formato CSV. Las principales funcionalidades incluyen:
 
 1- Asignación de saldos aleatorios: Asigna saldos aleatorios a una lista de 10 clientes predefinidos.
+
 2- Clasificación de saldos: Clasifica los saldos en tres rangos: bajo, medio y alto.
+
 3- Cálculo de estadísticas: Calcula el saldo máximo, saldo mínimo, saldo promedio y media geométrica de los saldos.
+
 4- Generación de reporte: Genera un reporte detallado de los saldos, incluyendo deducciones aplicadas, y lo exporta en formato CSV.
 
 Instrucciones de Ejecución
