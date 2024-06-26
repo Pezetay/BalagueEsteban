@@ -20,5 +20,5 @@ Al iniciar, el programa mostrará un menú con varias opciones:
 - Generar reporte de saldos y exportar a CSV: Solicita los montos de tres deducciones y genera un reporte con los saldos netos después de aplicar estas deducciones. El reporte se guarda en un archivo llamado reporte_saldos.csv.
 - Salir del programa: Termina la ejecución del programa.
 
-Seleccione la opción deseada ingresando el número correspondiente y presionando Enter.
-Siga las instrucciones que el programa le indique para cada opción seleccionada.
+* Seleccione la opción deseada ingresando el número correspondiente y presionando Enter. *
+* Siga las instrucciones que el programa le indique para cada opción seleccionada. *
